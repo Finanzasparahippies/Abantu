@@ -1,0 +1,29 @@
+.header {
+    background-color: $verde;
+    padding: 1rem 0 5rem 0;
+    size-adjust: 60;
+
+    img {
+        align-items: center;
+    }
+  
+
+}
+.titulo {
+    color: $blanco;
+    font-weight: 700;
+}
+.contenido-header{
+    align-items: center;
+    size-adjust: 150;
+    justify-content: space-between;
+}
+
+.logotype {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
