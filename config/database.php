@@ -7,8 +7,8 @@ class dataBase
     private $pdo;
 
     private const DSN = 'mysql:host=localhost;dbname=abantu';
-    private const USUARIO = 'root';
-    private const CONTRASENA = 'FELICESdeayudar4242';
+    private const USUARIO = '';
+    private const CONTRASENA = '';
 
     public function __construct()
     {
