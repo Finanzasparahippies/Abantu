@@ -81,7 +81,7 @@ class Usuario
     public $esUsuarioInicial;
     public $usuario_id;
     public $usuarios = [];
-    public $subUsuarios = [];
+    public $subusuarios = [];
     public $subusuario;
     public $nombres;
     public $apellidos;
@@ -91,7 +91,7 @@ class Usuario
     public $eWallet2;
     public $referido;
     public $montoSeleccionado;
-    public $tipoSubusuario = [];
+    public $tipoSubusuario = ['A,B,C,D'];
     public $nuevoTipoSubusuario;
     public $auspiciador;
     public $auspiciadorDisponible;
@@ -109,7 +109,7 @@ class Usuario
     public $arbolActual = 1;
     public $fechaRegistro;
 
-    public function __construct($usuario_id, $nombres, $apellidos, $telefono, $correo, $eWallet, $eWallet2, $cuentaBancaria, $cuentaBancaria2, $nivel, $fechaRegistro, $referido, $subusuario, $tipoSubusuario)
+    public function __construct($usuario_id, $nombres, $apellidos, $telefono, $correo, $eWallet, $eWallet2, $cuentaBancaria, $cuentaBancaria2, $nivel, $fechaRegistro, $referido, $subusuarios, $tipoSubusuario)
     {
         $this->usuario_id = $usuario_id;
         $this->nombres = $nombres;
@@ -123,7 +123,7 @@ class Usuario
         $this->nivel = $nivel;
         $this->fechaRegistro = $fechaRegistro;
         $this->referido = $referido;
-        $this->subusuario = $subusuario;
+        $this->subusuarios = $subusuarios;
         $this->tipoSubusuario = $tipoSubusuario;
     }
     public function generarArbolReferencias()
@@ -145,32 +145,32 @@ class Usuario
             return "No se puede agregar subusuario más allá del nivel 5";
         } else {
             // Determinar a qué árbol binario se debe agregar el subusuario
-            $arbolBinario = null;
-            if ($this->arbolActual === 1) {
-                $arbolBinario = &$this->arbolBinario1;
-                $this->arbolActual = 2; // El próximo irá al árbol 2
-            } else {
-                $arbolBinario = &$this->arbolBinario2;
-                $this->arbolActual = 1; // El próximo irá al árbol 1
-            }
+            // $arbolBinario = null;
+            // if ($this->arbolActual === 1) {
+            //     $arbolBinario = &$this->arbolBinario1;
+            //     $this->arbolActual = 2; // El próximo irá al árbol 2
+            // } else {
+            //     $arbolBinario = &$this->arbolBinario2;
+            //     $this->arbolActual = 1; // El próximo irá al árbol 1
+            // }
 
             // Verificar que no se exceda el número máximo de subusuarios por nivel en el árbol seleccionado
-            $numSubusuariosActual = 0;
-            foreach ($arbolBinario as $item) {
-                if ($item['nivel'] === $nivel) {
-                    $numSubusuariosActual++;
-                }
-            }
+            // $numSubusuariosActual = 0;
+            // foreach ($arbolBinario as $item) {
+            //     if ($item['nivel'] === $nivel) {
+            //         $numSubusuariosActual++;
+            //     }
+            // }
 
-            if ($numSubusuariosActual < 2) {
-                $arbolBinario[] = [
-                    'nivel' => $nivel,
-                    'subusuario' => $subusuario
-                ];
-                return "Subusuario agregado con éxito.";
-            } else {
-                $this->obtenerNivelInferiorDisponible();
-            }
+            // if ($numSubusuariosActual < 2) {
+            //     $arbolBinario[] = [
+            //         'nivel' => $nivel,
+            //         'subusuario' => $subusuario
+            //     ];
+            //     return "Subusuario agregado con éxito.";
+            // } else {
+            //     $this->obtenerNivelInferiorDisponible();
+            // }
             // Aquí puedes agregar la lógica para agregar el subusuario
             // Puedes guardarlos en las propiedades subusuariosNivel1, subusuariosNivel2, ..., según corresponda
             switch ($nivel) {
@@ -244,9 +244,81 @@ class Usuario
         return "No se encontró un nivel inferior disponible";
     }
 
-
-
-    function insertarUsuario($pdo, $nombres, $apellidos, $telefono, $correo, $passwordHash, $cuentaBancaria, $cuentaBancaria2, $eWallet, $eWallet2)
+    public function buscarNivelInferior($pdo, $nombreTabla, $auspiciadorDirecto) {
+        try {
+            // Consulta para obtener la cantidad de usuarios en cada nivel debajo del patrocinador
+            $query = "SELECT nivel, COUNT(*) as cantidad FROM $nombreTabla WHERE auspiciador_id = :auspiciador_id GROUP BY nivel";
+            
+            // Preparar y ejecutar la consulta
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':auspiciador_id', $auspiciadorDirecto, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $niveles = [];
+            // Almacenar la cantidad de usuarios en cada nivel
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $niveles[$row['nivel']] = $row['cantidad'];
+            }
+            
+            // Determinar el nivel en el cual el nuevo usuario puede ser agregado
+            $nivelParaAgregar = null;
+            for ($i = 1; $i <= 5; $i++) { // Asumiendo que hay 5 niveles
+                if (!isset($niveles[$i]) || $niveles[$i] < pow(2, $i) - 1) { // Comprobar si el nivel está completo
+                    $nivelParaAgregar = $i;
+                    break;
+                }
+            }
+            
+            return $nivelParaAgregar;
+            
+        } catch (PDOException $e) {
+            // Manejar errores de base de datos
+            echo "Error en la base de datos: " . $e->getMessage();
+            return null;
+        }
+    }
+    
+    public function actualizarTipoSubusuario($pdo, $nombreTabla, $auspiciadorDirecto)
+    {
+        try {
+            // Obtener los usuarios que tienen el auspiciadorDirecto especificado
+            $query = "SELECT * FROM $nombreTabla WHERE auspiciador_id = :auspiciador_id";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindValue(':auspiciador_id', $auspiciadorDirecto, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            // Tipos a asignar
+            $tipos = ['A', 'C', 'B', 'D'];
+            $index = 0;
+    
+            // Recorrer los usuarios y actualizar su tipoSubusuario
+            foreach ($usuarios as $usuario) {
+                // Crear consulta SQL para actualizar tipoSubusuario
+                $query = "UPDATE $nombreTabla SET tipoSubusuario = :tipoSubusuario WHERE usuario_id = :usuario_id";
+                
+                // Preparar y ejecutar la consulta
+                $stmt = $pdo->prepare($query);
+                $stmt->bindValue(':tipoSubusuario', $tipos[$index % 4], PDO::PARAM_STR);
+                $stmt->bindValue(':usuario_id', $usuario['usuario_id'], PDO::PARAM_INT);
+                $stmt->execute();
+    
+                $index++;
+            }
+    
+            echo "Tipos de subusuario actualizados con éxito.";
+    
+            return true;
+    
+        } catch (PDOException $e) {
+            // Manejar errores de base de datos
+            echo "Error en la base de datos: " . $e->getMessage();
+            return false;
+        }
+    }
+    
+    public function insertarUsuario($pdo, $nombres, $apellidos, $telefono, $correo, $passwordHash, $cuentaBancaria, $cuentaBancaria2, $eWallet, $eWallet2)
     {
         // Preparar la consulta SQL para insertar un nuevo usuario
         $query = "INSERT INTO usuario (nombres, apellidos, telefono, correo, password, cuentaBancaria, cuentaBancaria2, eWallet, eWallet2)
@@ -351,36 +423,180 @@ class Usuario
     }
 
 
-    public function actualizarAuspiciadorComunidad($pdo, $nombreTabla, $auspiciadorDirecto, $usuario_id)
-    {
+    // public function actualizarAuspiciadorComunidad($pdo, $nombreTabla, $auspiciadorDirecto, $usuario_id)
+    // {
+    //     try {
+    //         // Crear consulta SQL para actualizar la tabla
+    //         $query = "UPDATE $nombreTabla SET auspiciador_id = :auspiciador_id WHERE usuario_id = :usuario_id";
+
+    //         // Preparar y ejecutar la consulta
+    //         $stmt = $pdo->prepare($query);
+    //         $stmt->bindValue(':auspiciador_id', $auspiciadorDirecto, PDO::PARAM_INT);
+    //         $stmt->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
+    //         $stmt->execute();
+
+    //         // Obtener el número de filas afectadas
+    //         $numRows = $stmt->rowCount();
+    //         echo "Número de filas afectadas: $numRows<br>";
+
+    //         // Verificar si la actualización fue exitosa
+    //         if ($numRows > 0) {
+    //             echo "Auspiciador actualizado con éxito.";
+    //             return true;
+    //         } else {
+    //             echo "Error al actualizar.";
+    //             return false;
+    //         }
+    //     } catch (PDOException $e) {
+    //         // Manejar errores de base de datos
+    //         echo "Error en la base de datos: " . $e->getMessage();
+    //         return false;
+    //     }
+    // }
+
+    public function obtenerSubusuarios($pdo, $nombreTabla, $referido) {
         try {
-            // Crear consulta SQL para actualizar la tabla
-            $query = "UPDATE $nombreTabla SET auspiciador_id = :auspiciador_id WHERE usuario_id = :usuario_id";
+            // Consulta para obtener todos los usuarios cuyo auspiciador_id coincide con el referido
+            $query = "SELECT * FROM $nombreTabla WHERE auspiciador_id = :referido";
 
             // Preparar y ejecutar la consulta
             $stmt = $pdo->prepare($query);
-            $stmt->bindValue(':auspiciador_id', $auspiciadorDirecto, PDO::PARAM_INT);
-            $stmt->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
+            $stmt->bindValue(':referido', $referido, PDO::PARAM_INT);
             $stmt->execute();
 
-            // Obtener el número de filas afectadas
-            $numRows = $stmt->rowCount();
-            echo "Número de filas afectadas: $numRows<br>";
+            // Almacenar los resultados en una propiedad de la clase y también devolverlos
+            $this->subusuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $this->subusuarios;
 
-            // Verificar si la actualización fue exitosa
-            if ($numRows > 0) {
-                echo "Auspiciador actualizado con éxito.";
-                return true;
-            } else {
-                echo "Error al actualizar.";
-                return false;
-            }
         } catch (PDOException $e) {
             // Manejar errores de base de datos
             echo "Error en la base de datos: " . $e->getMessage();
-            return false;
+            return false; // Puedes devolver false o null en caso de error.
         }
     }
+  
+    public function actualizarTipoSubusuarioParaAuspiciador($pdo, $nombreTabla, $auspiciadorDirecto)
+{
+    try {
+        // Obtener el número de usuarios ya registrados bajo este auspiciadorDirecto
+        $query = "SELECT COUNT(*) as count FROM $nombreTabla WHERE auspiciador_id = :auspiciador_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindValue(':auspiciador_id', $auspiciadorDirecto, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $count = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+        if($count);
+        // Tipos a asignar
+        $tipos = ['A', 'C', 'B', 'D'];
+        $tipoSubusuarioAsignado = $tipos[$count % 4];
+
+        // Actualizar el tipo de subusuario para los registros asociados con auspiciadorDirecto
+        $query = "UPDATE $nombreTabla SET tipoSubusuario = :tipoSubusuario WHERE auspiciador_id = :auspiciador_id AND tipoSubusuario IS NULL LIMIT 1";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindValue(':auspiciador_id', $auspiciadorDirecto, PDO::PARAM_INT);
+        $stmt->bindValue(':tipoSubusuario', $tipoSubusuarioAsignado, PDO::PARAM_STR);
+        $stmt->execute();
+
+        echo "Tipo de subusuario actualizado con éxito.";
+
+        // Almacenar el tipo de subusuario en la propiedad de la instancia de la clase Usuario en la sesión
+        if (isset($_SESSION['usuarioObj'])) {
+            $_SESSION['usuarioObj']->nuevoTipoSubusuario = $tipoSubusuarioAsignado;
+        }
+
+        return true;
+
+    } catch (PDOException $e) {
+        // Manejar errores de base de datos
+        echo "Error en la base de datos: " . $e->getMessage();
+        return false;
+    }
+}
+
+public function actualizarAuspiciadorComunidad($pdo, $nombreTabla, $auspiciadorDirecto, $usuario_id, $nivel=1)
+{
+    try {
+        // Crear consulta SQL para actualizar la tabla
+        $query = "UPDATE $nombreTabla SET auspiciador_id = :auspiciador_id WHERE usuario_id = :usuario_id";
+
+        // Preparar y ejecutar la consulta
+        $stmt = $pdo->prepare($query);
+        $stmt->bindValue(':auspiciador_id', $auspiciadorDirecto, PDO::PARAM_INT);
+        $stmt->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Obtener el número de filas afectadas
+        $numRows = $stmt->rowCount();
+        echo "Número de filas afectadas: $numRows<br>";
+
+        // Verificar si la actualización fue exitosa
+        if ($numRows > 0) {
+            echo "Auspiciador actualizado con éxito.";
+
+            // Aquí agregar al usuario al árbol binario después de actualizar el auspiciador
+            if ($nivel > 5) {
+                return "No se puede agregar subusuario más allá del nivel 5";
+            }
+
+           // Determinar a qué árbol binario se debe agregar el subusuario y operar directamente en la propiedad correspondiente
+           $currentArbolBinario = null;
+           if ($this->arbolActual === 1) {
+               $currentArbolBinario = &$this->arbolBinario1;
+               $this->arbolActual = 2; // El próximo irá al árbol 2
+           } else {
+               $currentArbolBinario = &$this->arbolBinario2;
+               $this->arbolActual = 1; // El próximo irá al árbol 1
+           }
+
+
+            // Verificar que no se exceda el número máximo de subusuarios por nivel en el árbol seleccionado
+            $numSubusuariosActual = 0;
+            foreach ($currentArbolBinario as $item) {
+                if ($item['nivel'] === $nivel) {
+                    $numSubusuariosActual++;
+                }
+            }
+
+            if ($numSubusuariosActual < 2) {
+                $currentArbolBinario[] = [
+                    'nivel' => $nivel,
+                    'subusuario' => $usuario_id
+                ];
+                echo "Subusuario agregado al árbol binario con éxito.";
+                // Agregar subusuario a la propiedad correspondiente según su nivel
+                switch ($nivel) {
+                    case 1:
+                        $this->subusuariosNivel1[] = $usuario_id;
+                        break;
+                    case 2:
+                        $this->subusuariosNivel2[] = $usuario_id;
+                        break;
+                    case 3:
+                        $this->subusuariosNivel3[] = $usuario_id;
+                        break;
+                    case 4:
+                        $this->subusuariosNivel4[] = $usuario_id;
+                        break;
+                    case 5:
+                        $this->subusuariosNivel5[] = $usuario_id;
+                        break;
+                }
+            } else {
+                $this->obtenerNivelInferiorDisponible();
+            }
+
+            return true;
+        } else {
+            echo "Error al actualizar.";
+            return false;
+        }
+    } catch (PDOException $e) {
+        // Manejar errores de base de datos
+        echo "Error en la base de datos: " . $e->getMessage();
+        return false;
+    }
+}
+
 
     public function getNombre()
     {

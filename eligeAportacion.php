@@ -12,6 +12,9 @@ include 'funcionesUsuario.php'; // Asegúrate de que la ruta sea correcta
 
 session_start();
 
+echo "<pre>";
+var_dump($_SESSION['usuarioObj']);
+echo "</pre>";
 //Base de Datos
 include_once 'public/funciones.php';
 
@@ -26,9 +29,9 @@ if(isset($_SESSION['usuarioObj'])) {
 
     $usuario_id = $sesion->usuario_id;
 
-     echo "<pre>";
-     var_dump($sesion);
-     echo "</pre>";
+    //  echo "<pre>";
+    //  var_dump($sesion);
+    //  echo "</pre>";
 
     echo "El usuario_id es: " . (isset($sesion->usuario_id) ? $sesion->usuario_id : 'No disponible') . "<br>";
     echo "El correo es: " . (isset($sesion->correo) ? $sesion->correo : 'No disponible') . "<br>";
@@ -57,6 +60,9 @@ $referido = '';
 // $usuario_id = '';
 $nombreTabla = '';
 $montoSeleccionado = '';
+$tipoSubusuarioAsignado = '';
+// $subusuarios = $usuario->obtenerSubusuarios($pdo, $nombreTabla, $referido);
+
 // Aquí accedemos a las propiedades del objeto
 if ($usuario) {
     $usuarioObj;
@@ -70,6 +76,7 @@ if ($usuario) {
     $fechaRegistro = $usuario->fechaRegistro;
     // $comunidad = $usuario->comunidad;
     // y así sucesivamente para las demás propiedades que necesites...
+
 } else {
     $usuarioObj = null;
     $nombres = null;
@@ -80,6 +87,7 @@ if ($usuario) {
     $correo = null;
     $usuario_id = null;
     $fechaRegistro = null;
+    // $subusuarios = null;
 }
 // Puedes agregar aquí la lógica de procesamiento del formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -104,9 +112,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //   var_dump($auspiciadorDirecto, $usuario_id, $nombreTabla);
             //  exit;
             
-            $updateComunidad = $usuario ->actualizarAuspiciadorComunidad($pdo, $nombreTabla, $auspiciadorDirecto, $usuario_id);
+            $updateComunidad = $usuario ->actualizarAuspiciadorComunidad($pdo, $nombreTabla, $auspiciadorDirecto, $usuario_id, $nivel);
 
+            
             $_SESSION['usuarioObj']->auspiciadorDirecto = $auspiciadorDirecto; // <-- Añade esta línea
+
+            if($auspiciadorDirecto) {
+                $updateTipoS = $usuario-> actualizarTipoSubusuarioParaAuspiciador($pdo, $nombreTabla, $auspiciadorDirecto);
+                $_SESSION['usuarioObj']->tipoSubusuario = $tipoSubusuarioAsignado; // <-- Añade esta línea
+
+             }
+ 
 
             // header('Location: eligeAportacion.php');
 
