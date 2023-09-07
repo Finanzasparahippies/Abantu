@@ -1,0 +1,1343 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+.formulario {
+    border-style: none!important;
+    margin-top:5rem!important;
+    margin-bottom:5rem!important;
+    }
+.hidden {
+    display: none;
+}
+
+.paso {
+    position: relative; /* Permite posicionar elementos hijos de manera absoluta dentro de él */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos hijos horizontalmente */
+}
+
+.iconos {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.paso .iconos {
+    height: 15rem;
+    width: 15rem;
+    background-color: #05e09c;
+    background-image: linear-gradient(
+      to top,
+      var(--verde2) 0%,
+      var(--verde) 100% 
+    );
+    border-radius: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-style: double;
+  }
+
+.llamativo {
+    font-size: 48px; /* Tamaño de fuente aún más grande */
+    color: #05e09c; /* Color llamativo */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Alineación centrada */
+    text-transform: uppercase; /* Todo en mayúsculas */
+    margin: 20px 0; /* Espacio adicional alrededor del párrafo */
+    font-family: 'Ubuntu', sans-serif; /* Fuente deseada, si la tienes cargada */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+    padding: 0px 20px; /* Agregar un poco de espacio alrededor del texto */
+    animation: glow 2s ease-in-out infinite alternate; /*  Animación llamativa */
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #05e09c, 0 0 20px #05e09c, 0 0 30px #05e09c, 0 0 40px #05e09c;
+    }
+    to {
+        text-shadow: 0 0 20px #05e09c, 0 0 30px #05e09c, 0 0 40px #05e09c, 0 0 50px #05e09c, 0 0 60px #05e09c;
+    }
+}
+
+.llamativo2 {
+    font-size: 32px; /* Tamaño de fuente grande */
+    color: #000000; /* Color llamativo */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Alineación centrada */
+    text-transform: uppercase; /* Todo en mayúsculas */
+    margin: 20px 0; /* Espacio adicional alrededor del párrafo */
+    font-family: 'Ubuntu', sans-serif; /* Fuente deseada, si la tienes cargada */
+}
+
+
+.container {
+    max-width: 960px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.btn {
+    color: white;
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0069d9;
+    color: white;
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #007bff;
+    color: white;
+}
+
+.table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.contenido-header .logotype {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contenido-header .logotype .header__Logo {
+    max-width: 40rem; /* Ajusta el ancho máximo de la imagen */
+    height: auto; /* Ajusta la altura automáticamente */
+}
+
+.contenido-header .logotype .titulo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.comunidad-intro {
+    font-family: 'Ubuntu', sans-serif; /* Fuente elegante */
+    font-size: 20px; /* Tamaño de fuente más grande */
+    line-height: 1.8; /* Espaciado entre líneas más grande */
+    text-align: justify; /* Alineación justificada */
+    color: #333; /* Color de texto oscuro */
+    padding: 20px; /* Espaciado interno */
+}
+
+.comunidad-intro p {
+    margin: 0; /* Eliminar margen de párrafo */
+}
+
+.resaltar {
+    font-weight: bold; /* Texto en negrita */
+    color: #05e09c; /* Color llamativo */
+}
+
+.resaltar2 {
+    font-weight: bold; /* Texto en negrita */
+    color: #000000; /* Color llamativo */
+}
+
+
+.valor-comunidad {
+    background-color: #05e09c;
+    padding: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.valor-comunidad h2, .valor-comunidad p {
+    margin: 0;
+    padding: 10px;
+}
+
+.valor-left {
+    width: 50%;
+    text-align: right;
+    border-right: 2px solid #333; /* Línea divisoria */
+}
+
+.valor-right {
+    width: 50%;
+    text-align: left;
+    padding-left: 10px; /* Espacio a la izquierda de la línea divisoria */
+    display: flex;
+    justify-content: center; /* Centrar el video horizontalmente */
+    align-items: center; /* Centrar el video verticalmente */
+}
+
+.valor-video {
+    max-width: 100%; /* Asegurar que el video no exceda el ancho del contenedor */
+    border: 5px solid white;
+}
+
+
+.mision-vision {
+    background-color: #d9e9f3;
+    padding: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: justify;
+}
+.mision-vision2 {
+    background-color: #d9e9f3;
+    padding: 0.5px;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: justify;
+}
+
+.mision-vision blockquote {
+    background-color: #05e09c;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 1em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+    font-style: italic;
+    font-family: 'Ubuntu', serif;
+    text-align: justify;
+}
+
+.mision-vision blockquote p {
+    margin: 0;
+}
+
+.mision-vision .autor {
+    display: block;
+    text-align: right;
+    color: #555;
+    font-weight: bold;
+}
+.mision-vision2 blockquote {
+    background-color: #05e09c;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 1em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+    font-style: italic;
+    font-family: 'Ubuntu', serif;
+    text-align: justify;
+}
+
+.mision-vision2 blockquote p {
+    margin: 0;
+}
+
+.mision-vision2 .autor {
+    display: block;
+    text-align: right;
+    color: #555;
+    font-weight: bold;
+}
+
+.icon-link {
+    cursor: pointer; /* Añade esta línea */
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+
+.icon-link:hover {
+    opacity: 0.8; /* Efecto de transparencia al pasar el mouse */
+}
+
+.share-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.share-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.share-menu a:hover {
+    background-color: #f1f1f1;
+}
+.faq-question {
+  cursor: pointer;
+}
+
+.faq-answer {
+  display: none; /* Esconde las respuestas por defecto */
+  transition: max-height 0.3s ease-out; /* Animación opcional */
+}
+/* Estilos para los términos y condiciones */
+.terminos-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.terminos-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.terminos-content {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.video-seccion {
+    position: relative;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-destacado {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 5px solid #05e09c; /* Define el grosor y color del borde */
+
+}
+
+
+.video-seccion h2 {
+    color: #333; /* o el color que prefieras para el texto del encabezado */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+.styled-button {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #007bff;
+    border: 1px solid transparent;
+    padding: .75rem 1.5rem; /* incrementa el relleno para un botón más grande */
+    font-size: 1.25rem; /* incrementa el tamaño de fuente para un texto más grande */
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.align-right {
+    margin-left: auto;
+}
+
+
+.styled-button:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.styled-button:focus {
+    outline: 0;
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    box-shadow: 0 0 0 0.2rem rgba(38,143,255,.5);
+}
+
+.styled-button:active {
+    color: #fff;
+    background-color: #0062cc;
+    border-color: #0056b3;
+}
+
+.styled-checkbox2 {
+    display: none;
+}
+
+
+
+
+.styled-checkbox2 + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    width: 20px; /* Ajusta según tus necesidades */
+    height: 20px;
+    background-color: #eee;
+    border: 2px solid #ddd;
+    display: inline-block;
+}
+.styled-checkbox2 + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;  /* Centrar verticalmente */
+    transform: translateY(-50%);  /* Centrar verticalmente */
+    width: 25px;
+    height: 25px;
+    border: 2px solid #aaa;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.styled-checkbox2:checked + label:after {
+    content: '\2717'; /* Código Unicode para la 'X' */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px; /* Ajusta según tus necesidades */
+  /*  border: solid #000; */
+    border-width: 0 3px 3px 0;
+
+}
+
+
+
+.styled-checkbox {
+    display: none;
+}
+
+.styled-checkbox + label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+    color: #393939;
+    font-size: 16px;
+}
+
+.styled-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #aaa;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.styled-checkbox:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 5px;
+    width: 7px;
+    height: 14px;
+    border: solid #000;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+/* CSS del Formulario */
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(135deg, #05e09c, #03b07c)!important;
+    border-radius: 50px!important;
+    /*box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1)!important;*/
+}
+
+form2 {
+    display: flex;
+    justify-content: center;
+    padding-top:1rem;
+    padding-bottom:1rem;
+    align-items: center;
+    flex-direction: column;
+    background: white !important;
+    border-radius: 50px!important;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1)!important;
+}
+
+form.dark-mode{
+    background: hsl(160, 50%, 85%) !important;
+
+}
+
+form2.dark-mode{
+    background: hsl(160, 50%, 85%) !important;
+
+}
+
+.input-text::placeholder {
+    color: gray !important;
+}
+input:not([type=submit]), select, textarea {
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem;
+    width: 100%!important;
+}
+
+
+.dark-mode .formulario input:not([type=submit]), .dark-mode .formulario select, .dark-mode .formulario textarea {
+    background-color: white ; 
+    color: gray !important;
+}
+
+label {
+    font-size: 1.5em;
+    color: #333;
+}
+
+select {
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 1em;
+}
+
+input[type=submit] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    background: #03b07c;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: transform 0.3s, filter 0.3s;
+    font-weight:bold;
+}
+
+input[type=submit]:hover {
+        background: #03b07c;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+
+
+}
+
+.containerP {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+.privacy-policy-title {
+    margin-bottom: 30px;
+}
+
+.privacy-policy-section {
+    margin-bottom: 30px;
+}
+
+.privacy-policy-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.privacy-policy-section p,
+.privacy-policy-section ul {
+    margin-bottom: 10px;
+}
+.contenedorA {
+    width: 100%; /* O puedes establecer un ancho fijo si lo prefieres */
+    padding: 0;
+    margin: 0 auto; /* Centra el contenedor si tiene un ancho máximo */
+    overflow: hidden; /* Evita que el contenido sobresalga */
+}
+
+/* Añade estas media queries al final de tu archivo CSS */
+
+@media only screen and (max-width: 768px) {
+    .valor-comunidad {
+        flex-direction: column; /* Cambia la dirección de los elementos a vertical */
+    }
+
+    .valor-left, .valor-right {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        text-align: center; /* Centra el contenido */
+    }
+
+    .valor-left {
+        border-right: none; /* Elimina la línea divisoria en móviles */
+    }
+
+    .valor-video {
+        width: 100%; /* Ajusta el ancho del video */
+        height: auto; /* Altura automática para mantener la proporción */
+    }
+
+  .codigo-section {
+    display: flex;
+    grid-template-columns: 1fr; /* Solo una columna en móviles */
+    align-items: center;
+    text-align: center;
+    gap: 20px; /* Espaciado entre elementos grid */
+    box-sizing: border-box;
+}
+
+.info-card h1 {
+    font-size: 40px!important;
+    padding: 0 10px;
+}
+.info-card h2 {
+    color: black;
+    font-size: 20px!important;
+
+}
+
+.variable-box {
+    display:block;
+    margin-top: 0; /* Eliminamos el margen arriba ya que gap se encargará del espaciado */
+}
+input:not([type=submit]), select, textarea {
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem;
+    width: 100%!important;
+}    
+.imagen-perfil-container {
+        float: none; /* Evitamos que flote en móviles */
+        margin-right: 0; /* Eliminamos el margen derecho en móviles */
+        margin-bottom: 15px; /* Añadimos margen inferior para separarlo del contenido debajo */
+        width: 100%; /* Ocupará todo el ancho disponible en móviles */
+    }
+
+.imagen-perfil {
+    float: left;
+    margin-right: 15px;
+    width: 80px;
+}
+
+.imagen-perfil img {
+    width: 100%;
+    height: auto;
+}
+    .overlay button {
+        display: block; /* Mostramos el botón en móviles para que sea claro que pueden hacer clic */
+    }
+
+.titulo-bienvenida {
+        text-align: center;
+        font-size: 1.5rem; /* Ajusta según lo que necesites */
+    }
+    
+.file-upload-label {
+    padding:0px 35px;
+        width: 100%;
+        box-sizing: inherit;
+         display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Espacio entre el icono y el texto */
+    }
+      .btn-profesional {
+    padding: 11px 41px;
+    font-size: 16px;
+}
+  .file-upload-label svg {
+    width: 80px; /* Tamaño más pequeño para el icono en dispositivos móviles */
+    height: 80px;
+  }
+  .btn-profesional {
+    flex-basis: 40%;
+    padding: 22px 40px;
+    font-size: 16px;
+    background-color: #05e09c;
+    color: white!important;
+    border: none;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s;
+}
+.file-name {
+    display: block;
+    margin-top: 10px;
+    margin-left: 44px!important;
+    color: #666;
+}
+input[type=submit] {
+    margin-bottom: 1rem;
+}
+ #uploadForm {
+    padding: 1rem 1rem; /* Agregar espacio alrededor del formulario */
+  }
+  .variable-box {
+    flex-basis: 40%;
+    border: 2px solid #05e09c;
+    border-radius: 25px;
+    padding: 6px 2px!important;
+    text-align: center;
+    background-color: #fff;
+    color: #05e09c;
+    font-size: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.file-upload-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.btn {
+    padding: 10px 2px!important;
+}
+.variable-label, .variable-box {
+    margin-right: 0px!important;
+}
+.input[type=submit] {
+    padding: 0px 0px!important;
+}
+.input[type=submit]:hover {
+     transform: translateY(-3px);
+    padding: 0px 0px!important;
+}
+
+.card-info h2 {
+    border-bottom: 2px solid #05e09c;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+} 
+
+/* Estilos adicionales para pantallas más pequeñas, como dispositivos móviles con 366px */
+@media only screen and (max-width: 366px) {
+    .valor-comunidad {
+        padding: 10px; /* Añade padding para dar un poco de espacio */
+    }
+
+    .info-card h1 {
+        font-size: 20px; /* Reducción del tamaño de fuente para que se ajuste mejor */
+    }
+
+    .imagen-perfil {
+        margin: 0 auto; /* Centra el perfil en dispositivos pequeños */
+        width: 60px;    /* Reducción del tamaño de la imagen del perfil para que se ajuste mejor */
+    }
+
+    .imagen-perfil img {
+        border-radius: 50%; /* Opcional: puedes hacer que la imagen del perfil sea circular */
+    }
+
+    .titulo-bienvenida {
+        font-size: 1.2rem; /* Reducción del tamaño de fuente para que se ajuste mejor */
+        margin-top: 10px; /* Añade un poco de margen arriba para separar del contenido anterior */
+    }
+
+    .file-upload-label {
+        font-size: 14px; /* Reducción del tamaño de fuente para que se ajuste mejor */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+  .contenedor2 {
+    max-width: 100%; /* Usar el ancho completo del dispositivo */
+    padding: 1rem; /* Agregar un poco de espacio entre el contenido y el borde */
+  }
+
+  #uploadForm {
+    padding: 1rem; /* Agregar espacio alrededor del formulario */
+  }
+  .btn-profesional {
+    padding: 11px 41px;
+    font-size: 16px;
+}
+}
+
+input[type="file"] {
+    background-color: white;
+    border: none;
+    border-radius:25px;
+    cursor: pointer;
+}
+
+input[type="file"]:hover {
+    background-color: #e5e5e5;
+    transform: translateY(-3px);
+
+}
+
+.imagen-perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagen-perfil {
+    width: 100px; /* Ajusta el tamaño del círculo según tus necesidades */
+    height: 100px; /* Igual al ancho para crear un círculo perfecto */
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.imagen-perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para llenar el círculo */
+}
+/* Estilo para el botón de mostrar/ocultar */
+
+.toggle-btn:hover {
+    background-color: #03b07c;
+    transform: translateY(-2px);
+}
+
+.toggle-btn:active {
+    transform: translateY(1px);
+}
+
+.toggle-btn2:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(5, 224, 156, 0.3); /* Un pequeño glow al hacer focus, para mejorar accesibilidad */
+}
+.toggle-btn3:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(5, 224, 156, 0.3); /* Un pequeño glow al hacer focus, para mejorar accesibilidad */
+}
+/* Contenedor para centrar el botón */
+.contenedor4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px; /* Espaciado entre el botón y la tabla */
+}
+
+/* Estilos del botón */
+.toggle-btn2 {
+    background-color: gray; /* Color azul primario */
+    border: none;
+    color: white;
+    margin-top:1rem;
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 25px!important; /* Esquinas redondeadas */
+    font-size: 16px; /* Tamaño de letra */
+    cursor: pointer; /* Cursor de mano al pasar por encima */
+    transition: background-color 0.3s; /* Efecto de transición al pasar el cursor */
+    display: flex; /* Para alinear el ícono con el texto */
+    align-items: center; /* Alinea verticalmente el ícono con el texto */
+}
+
+/* Efecto al pasar el cursor por encima del botón */
+.toggle-btn2:hover {
+    background-color: #0056b3; /* Color azul más oscuro */
+}
+
+/* Espaciado entre el ícono y el texto */
+.toggle-btn2 i {
+    margin-right: 10px; /* Espaciado a la derecha del ícono */
+}
+
+/* Estilo para la tabla */
+.table-responsive {
+    overflow-x: auto; /* Desplazamiento horizontal si es necesario */
+}
+
+.toggle-button3 {
+    display: inline-block;
+    background-color: #05e09c;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.toggle-button3:hover {
+    background-color: #03b07c;
+}
+
+#linkTabla .page-linkt {
+    color: #05e09c;  /* Cambia el color de texto */
+    background-color: #fff; /* Cambia el color de fondo */
+    padding: 5px 10px; /* Añade padding */
+    margin: 5px; /* Añade margin */
+    text-decoration: none; /* Quita el subrayado */
+    font-weight: bold;
+}
+
+#linkTabla .page-linkt:hover {
+    background-color: #05e09c; /* Cambia el color de fondo al hacer hover */
+    color: #fff;  /* Cambia el color de texto */
+}
+
+/* Estilos generales para el contenedor */
+.contenedor3 {
+    background-color: #05e09c; /* Un color de fondo suave */
+    padding: 5px; /* Espaciado interno para que el texto no esté pegado a los bordes */
+    border-radius: 10px; /* Bordes redondeados para un look moderno */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sutil sombra para dar profundidad */
+    max-width: 800px; /* Ancho máximo para que el texto sea fácil de leer */
+    margin: 0 auto; /* Centrar el contenedor si es menos que el ancho de su contenedor padre */
+}
+
+/* Estilo para el contenido principal */
+.mision-vision2 {
+    font-size: 18px; /* Tamaño de fuente más grande para legibilidad */
+    line-height: 1.5; /* Espaciado entre líneas para una mejor lectura */
+    color: #333; /* Color de texto más oscuro para mejorar el contraste */
+    text-align: justify; /* Justificar el texto para un look pulido */
+    border-radius: 10px; /* Bordes redondeados para un look moderno */
+
+}
+
+/* Elementos con clase "llamativo2" para destacar partes específicas del texto */
+.llamativo3 {
+    color: #05e09c; /* El color que ya especificaste */
+    font-weight: bold; /* Texto en negrita */
+    background-color: #e6f9f2; /* Fondo claro del color principal para que destaque aún más */
+    padding: 5px; /* Espaciado interno para el fondo */
+    border-radius: 5px; /* Bordes redondeados */
+}
+ .dark-mode, .mostrar {
+        background-color: #1a1a1a!important;
+    }
+    .navegacion{
+        background-color: white!important;
+
+    }
+.derecha {
+    position: fixed; /* Hace que el botón sea fijo en la pantalla */
+    top: 10px;       /* Define la distancia desde la parte superior */
+    right: 10px;     /* Define la distancia desde la parte derecha */
+    display: flex;   /* Organiza los elementos en fila */
+    align-items: center; /* Centra los elementos verticalmente */
+    gap: 10px;       /* Define el espacio entre los elementos */
+    padding: 5px 10px; /* Espaciado interno alrededor del botón */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.dark-mode-boton {
+    height: 24px !important; /* Define la altura del icono */
+    width: auto !important;  /* Mantiene la proporción del icono */
+}
+/* Transición suave para todos los cambios de estilo */
+.derecha, .dark-mode-boton {
+    transition: all 0.3s ease !important;
+}
+
+/* Cambio de opacidad y transformación al pasar el mouse sobre el botón */
+.dark-mode-boton:hover {
+    opacity: 0.7 1!important; /* Disminuye la opacidad */
+    transform: scale(1.05) !important; /* Aumenta ligeramente el tamaño */
+}
+
+/* Efecto de pulsación cuando se hace clic en el botón */
+.dark-mode-boton:active {
+    transform: scale(0.95) !important; /* Disminuye ligeramente el tamaño */
+}
+
+/* Si el modo oscuro está activo, podrías considerar agregar una clase .active al botón y rotar el ícono */
+.dark-mode-boton.active {
+    transform: rotate(180deg) !important; /* Rota el ícono 180 grados */
+}
+
+.contenedor2 {
+    background-color:transparent!important;
+    margin: 0rem auto!important;
+    max-width: 80rem;
+}
+
+
+
+select:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #f2f2f2;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(5, 224, 156, 0.5);
+}
+.submit-btn {
+    font-weight:bold;
+    margin-bottom: 10px;
+    background-color: #03b07c;
+    border: none;
+    border-radius: 12px;
+    color: #FFF;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+.submit-btn:hover {
+    background: #05e09;
+    transform: translateY(-3px);
+    transition: background-color 0.9s;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+
+
+}
+select {
+    padding: 5px;
+    border-radius: 25px;
+    font-size: 16px;
+}
+
+.btn-group {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    .btn-red {
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        background-color: white;
+        color: #05e09c;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        font-weight:bold;
+    }
+
+   .btn-red.active {
+    background: #03b07c;
+    color: white;
+    font-weight:bold;
+}
+
+ .error-message {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #A9F5D0; 
+            color: white;
+            text-align: center;
+        }
+
+        .error-message h2 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        .error-message p {
+            margin: 20px 0;
+        }
+
+        .error-message a {
+           padding: 12px 30px;
+    font-size: 16px;
+    background: linear-gradient(135deg, #05e09c, #03b07c);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    transition: transform 0.3s, filter 0.3s;
+        }
+
+        .error-message a:hover {
+ transform: translateY(-3px);
+    filter: brightness(1.1);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+       .alinear-derecha {
+    display: flex;
+    justify-content: center;
+    padding-top: 0rem!important;
+}
+.btn-red:hover{
+    background-color:#03b07c;
+}
+
+ #redForm {
+    background-color: transparent;
+    margin-bottom:5rem;
+}
+.campo label {
+    display: inline;
+}
+
+.error-messageReferido {
+    border: 1px solid #e74c3c;
+    background-color: #f5c6c6;
+    padding: 16px;
+    border-radius: 4px;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.error-messageReferido h3 {
+    color: #c0392b;
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.error-messageReferido p {
+    color: #7f3333;
+}
+/* Estilos para el contenedor del formulario */
+.formularioArchivos {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 440px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.file-upload-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    border: 2px dashed #4CAF50;
+    border-radius: 25px;
+    padding: 15px;
+    transition: border-color 0.3s;
+}
+
+.file-upload-wrapper:hover {
+    border-color: #2E7D32; /* Un tono más oscuro cuando el mouse está encima */
+}
+.file-upload-input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(230,230,230,1) 100%);
+    padding: 12px 20px;
+    color: black;
+    font-weight: bold;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.file-upload-label:hover {
+    background: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(255,255,255,1) 100%);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+.file-upload-label svg {
+    margin-left: 10px;
+    fill: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.file-upload-label:hover svg {
+    transform: rotate(15deg);
+    transform: translateY(-3px);
+}
+
+
+.file-name {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: grey;
+}
+
+.submit-btn2 {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 16px;
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+.submit-btn2:hover {
+    background-color: #03b07c!important; /* Un tono más oscuro cuando el mouse está encima */
+    transform: translateY(-3px);
+}
+.imagen-perfil-container {
+    display: inline-block;
+    position: relative;
+}
+
+.imagen-perfil-container img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Esto hará que la imagen sea redonda */
+}
+
+.imagen-perfil-container .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0); /* Transparente por defecto */
+    overflow: hidden;
+    width: 100%;
+    height: 100%; /* Ahora cubre toda la imagen */
+    transition: background-color .5s ease; /* Sólo animamos el cambio de color */
+    text-align: center;
+    line-height: 80px; /* Para centrar el texto verticalmente */
+    color: transparent; /* El texto es transparente por defecto */
+    border-radius: 50%
+
+}
+
+.imagen-perfil-container:hover .overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Oscuro al hacer hover */
+    cursor: pointer;
+    color: white; /* El texto se vuelve blanco al hacer hover */
+    border-radius: 50%
+ 
+}
+
+.imagen-perfil-container .overlay a {
+    color: inherit; /* Tomará el color de su contenedor parent (transparente u blanco) */
+    font-size: 12px;
+    text-decoration: none;
+    width: 80px;
+    height: 80px;
+}
+
+.contenedor-principal {
+    /* Asegúrate de tener algún padding si es necesario para que el contenido no toque los bordes de la pantalla. */
+    padding: 20px;
+}
+
+.imagen-perfil {
+    float: left;
+    margin-right: 15px;
+    width: 80px;
+}
+
+.imagen-perfil img {
+    width: 100%;
+    height: auto;
+}
+
+.titulo-bienvenida {
+    /* Esto evitará que las palabras se rompan a la mitad en pantallas más pequeñas */
+    word-wrap: break-word;
+}
+
+#triggerFileInput {
+    display:none;
+}
+#triggerFileInput {
+background-color: rgba(0, 0, 0, 0.5); /* Oscuro al hacer hover */
+    cursor: pointer;
+    color: white; /* El texto se vuelve blanco al hacer hover */
+    border-radius: 50%
+}
+
+/* Estilo cuando está en modo oscuro */
+.dark-mode .container {
+    background-color: #1a1a1a;
+}
+
+.custom-alert {
+    background: linear-gradient(135deg, rgba(63,209,123,1) 0%, rgba(14,163,255,1) 100%);
+    border: none;
+    color: #ffffff;
+    display: block;
+    text-align: center;
+    /* padding: 15px 20px;  Añadido para dar más espacio y hacer que la alerta sea más grande */
+    font-size: 3rem; /* Aumentar el tamaño del texto */
+    line-height: 1.5; /* Ajuste de la línea para una mejor legibilidad */
+    font-weight: 500; /* Un poco más de grosor para las letras */
+    border-radius: 8px; /* Un borde más redondeado para suavizar las esquinas */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Sombra más difuminada y prominente */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+   /*  opacity: 0; */
+    transform: translateY(20px);
+    width: auto; /* Asegurarse de que no ocupe todo el ancho por defecto, a menos que el contenido lo requiera */
+    max-width: 90%; /* Limitar el ancho máximo para no ocupar toda la pantalla en dispositivos grandes */
+    margin: 10px auto; /* Centrar en el medio y dar un pequeño margen superior e inferior */
+}
+
+.custom-alert.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.custom-alert i {
+    font-size: 1.8rem; /* Aumentar aún más el tamaño del ícono */
+    margin-right: 15px; /* Añadir más espacio entre el ícono y el texto */
+    vertical-align: middle; /* Asegurarse de que el ícono esté centrado verticalmente con el texto */
+}
+
+/* Estilo para los mensajes de error */
+.custom-alertError {
+    background: linear-gradient(135deg, #f85032 0%, #e73827 100%);
+    border: none;
+    color: #ffffff;
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin: 10px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 3rem; /* Aumentar el tamaño del texto */
+    width: auto; /* Asegurarse de que no ocupe todo el ancho por defecto, a menos que el contenido lo requiera */
+    max-width: 90%; /* Limitar el ancho máximo para no ocupar toda la pantalla en dispositivos grandes */
+}
+
+.custom-alertError i {
+    margin-right: 10px;
+}
+
+
+
+
+

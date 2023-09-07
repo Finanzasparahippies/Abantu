@@ -1,0 +1,42 @@
+.header {
+    background-color: $verde;
+        width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+//    padding: 1rem 0 5rem 0;
+
+ img {
+     max-width: 100%;
+    height: auto;
+  }
+  
+
+}
+
+.titulo {
+    color: $blanco;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 1rem; /* ajusta este valor según necesites */
+    }
+}
+
+.contenido-header{
+    display: flex;
+    align-items: center;
+ //   justify-content: space-between;
+}
+@media only screen and (max-width: 600px) {
+    .header__Logo {
+        max-width: 50%;
+    }
+}
+
+
+
+

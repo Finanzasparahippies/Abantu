@@ -1,0 +1,23 @@
+// @import '../base/utilidades';
+// $separacion : 3rem;
+$amarillo: #E08709;
+$verde: #05e09c;
+
+
+.alerta {
+    padding: .5rem;
+    text-align: center;
+    color: #ffff;
+    font-weight: 700px;
+    text-transform: uppercase;
+    margin: 1rem 0;
+    border-radius: 50rem;
+
+    &.error {
+        background-color: $amarillo;  
+    }
+
+    &.exito {
+        background-color: $verde;
+    }
+}
